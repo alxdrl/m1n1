@@ -3,3 +3,5 @@
 dist/
 **/__pycache__/*
 .vscode/
+m1n1/data/**
+!m1n1/data/.gitkeep
