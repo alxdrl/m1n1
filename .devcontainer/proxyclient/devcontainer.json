@@ -1,0 +1,21 @@
+{
+  "name": "proxyclient (Python)",
+  "workspaceFolder": "/workspaces/m1n1/proxyclient",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/workspaces/m1n1/proxyclient/.venv/bin/python"
+      }
+    }
+  },
+  "postCreateCommand": "python -m venv .venv && . .venv/bin/activate && python -m pip install --upgrade pip setuptools wheel && if [ -f requirements.txt ]; then pip install -r requirements.txt; fi",
+  "remoteUser": "vscode"
+}
