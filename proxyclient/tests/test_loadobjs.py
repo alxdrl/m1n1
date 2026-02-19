@@ -3,8 +3,8 @@
 
 import pytest
 
-from proxyclient.m1n1.loadobjs import run_tool
-from proxyclient.m1n1.loadobjs import tool_output_lines
+from m1n1.loadobjs import run_tool
+from m1n1.loadobjs import tool_output_lines
 
 
 # pylint: disable=redefined-outer-name

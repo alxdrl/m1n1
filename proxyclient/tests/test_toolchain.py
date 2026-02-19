@@ -8,9 +8,9 @@ from posix import uname_result
 
 import pytest
 
-from proxyclient.m1n1.toolchain import LLVMResolver
-from proxyclient.m1n1.toolchain import BrewLLVMResolver
-from proxyclient.m1n1.toolchain import Toolchain
+from m1n1.toolchain import LLVMResolver
+from m1n1.toolchain import BrewLLVMResolver
+from m1n1.toolchain import Toolchain
 
 
 class TestLLVMResolver:
