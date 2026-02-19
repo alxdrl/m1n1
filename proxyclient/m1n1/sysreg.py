@@ -11,7 +11,20 @@ def _load_registers():
     sysreg_fwd = {}
     sysop_fwd = {}
     for fname in ["arm_regs.json", "apple_regs.json"]:
-        data = json.load(open(os.path.join(os.path.dirname(__file__), "..", "..", "tools", fname)))
+        # Try packaged location first, then fall back to source tree location
+        base_dir = os.path.dirname(__file__)
+        paths = [
+            os.path.join(base_dir, "data", fname),  # Packaged location
+            os.path.join(base_dir, "..", "..", "tools", fname),  # Source tree location
+        ]
+
+        for path in paths:
+            if os.path.exists(path):
+                data = json.load(open(path))
+                break
+        else:
+            raise FileNotFoundError(f"Could not find {fname} in any expected location")
+
         for reg in data:
             if "accessors" in reg:
                 for acc in reg["accessors"]:
