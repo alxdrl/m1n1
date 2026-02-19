@@ -1,6 +1,6 @@
 [project]
 name = "m1n1-proxyclient"
-version = "0.2.0"
+version = "0.4.0"
 description = "M1N1 proxy client for interacting with Apple Silicon devices"
 authors = [
     {name = "The Asahi Linux Contributors"}
