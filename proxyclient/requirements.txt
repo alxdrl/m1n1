@@ -1,2 +1,0 @@
-construct>=2.10
-pyserial>=3.4
