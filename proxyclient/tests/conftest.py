@@ -3,8 +3,8 @@
 
 import pytest
 
-from proxyclient.m1n1.asm import ARMAsm
-from proxyclient.m1n1.toolchain import Toolchain
+from m1n1.asm import ARMAsm
+from m1n1.toolchain import Toolchain
 
 CODE_LOCATION = 0x1238
 
