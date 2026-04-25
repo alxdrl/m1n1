@@ -18,6 +18,7 @@ jobs:
         python-version: "3.x"
 
     - name: Install pypa/build
+      working-directory: proxyclient
       run: >-
         python3 -m
         pip install
@@ -25,13 +26,14 @@ jobs:
         --user
 
     - name: Build a binary wheel and a source tarball
+      working-directory: proxyclient
       run: python3 -m build
 
     - name: Store the distribution packages
       uses: actions/upload-artifact@v5
       with:
         name: python-package-distributions
-        path: dist/
+        path: proxyclient/dist/
 
   publish-to-pypi:
     name: Publish m1n1-proxyclient distribution package to PyPI
