@@ -1,6 +1,6 @@
 [project]
 name = "m1n1-proxyclient"
-version = "0.4.0"
+dynamic = ["version"]
 description = "M1N1 proxy client for interacting with Apple Silicon devices"
 authors = [
     {name = "The Asahi Linux Contributors"}
@@ -19,19 +19,23 @@ dev = [
     "pytest>=8.0"
 ]
 
-[[tool.poetry.packages]]
-include = "m1n1"
-
-[tool.poetry]
-include = ["tools/**/*"]
-
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [project.urls]
 Homepage = "https://github.com/AsahiLinux/m1n1"
 Issues = "https://github.com/AsahiLinux/m1n1/issues"
+
+[build-system]
+requires = ["setuptools>=65.0", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["m1n1*"]
+
+[tool.setuptools_scm]
+write_to = "m1n1/_version.py"
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+search_parent_directories = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
