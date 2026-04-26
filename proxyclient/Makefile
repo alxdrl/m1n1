@@ -4,11 +4,10 @@ PYTHON ?= python3
 TWINE ?= twine
 
 DATADIR := m1n1
-VERSION := $(shell python -c "import setuptools_scm; print(setuptools_scm.get_version(search_parent_directories=True, version_scheme='no-guess-dev', local_scheme='no-local-version'), end='')" )
-$(info VERSION=$(VERSION))
-
+VERSION := $(shell python -c "import setuptools_scm; print(setuptools_scm.get_version(search_parent_directories=True), end='')" )
 WHEEL := dist/m1n1_proxyclient-$(VERSION)-py3-none-any.whl
 TARBALL := dist/m1n1_proxyclient-$(VERSION).tar.gz
+$(info VERSION=$(VERSION) WHEEL=$(WHEEL) TARBALL=$(TARBALL))
 
 SOURCES := $(shell find m1n1 -name '*.py' 2>/dev/null)
 DATA_FILES := $(DATADIR)/apple_regs.json $(DATADIR)/arm_regs.json
