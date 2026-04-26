@@ -5,6 +5,7 @@ TWINE ?= twine
 
 DATADIR := m1n1
 VERSION := $(shell python -c "import setuptools_scm; print(setuptools_scm.get_version(search_parent_directories=True, version_scheme='no-guess-dev', local_scheme='no-local-version'), end='')" )
+$(info VERSION=$(VERSION))
 
 WHEEL := dist/m1n1_proxyclient-$(VERSION)-py3-none-any.whl
 TARBALL := dist/m1n1_proxyclient-$(VERSION).tar.gz
@@ -26,4 +27,4 @@ publish: $(WHEEL) $(TARBALL)
 	$(TWINE) upload $(WHEEL) $(TARBALL)
 
 clean:
-	rm -rf dist/
+	rm -rf dist/ m1n1/_version.py
