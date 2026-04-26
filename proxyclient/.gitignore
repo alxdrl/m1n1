@@ -4,3 +4,4 @@ dist/
 **/_version.py
 **/__pycache__/*
 .vscode/
+**/*.egg-info/**
