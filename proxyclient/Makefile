@@ -1,4 +1,4 @@
-.PHONY: all build clean publish publish-test
+.PHONY: all test build clean publish publish-test
 
 PYTHON ?= python3
 TWINE ?= twine
@@ -24,6 +24,9 @@ publish-test: $(WHEEL) $(TARBALL)
 
 publish: $(WHEEL) $(TARBALL)
 	$(TWINE) upload $(WHEEL) $(TARBALL)
+
+test:
+	LC_ALL=C pytest
 
 clean:
 	rm -rf dist/ m1n1/_version.py m1n1_proxyclient.egg-info
