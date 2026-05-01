@@ -34,6 +34,7 @@ include = ["m1n1*", "tools*"]
 [tool.setuptools_scm]
 write_to = "m1n1/_version.py"
 search_parent_directories = true
+local_scheme = "no-local-version"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
