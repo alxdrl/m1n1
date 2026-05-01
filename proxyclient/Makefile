@@ -26,4 +26,4 @@ publish: $(WHEEL) $(TARBALL)
 	$(TWINE) upload $(WHEEL) $(TARBALL)
 
 clean:
-	rm -rf dist/ m1n1/_version.py
+	rm -rf dist/ m1n1/_version.py m1n1_proxyclient.egg-info
