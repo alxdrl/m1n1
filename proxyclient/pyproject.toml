@@ -34,7 +34,7 @@ include = ["m1n1*", "tools*"]
 [tool.setuptools_scm]
 write_to = "m1n1/_version.py"
 search_parent_directories = true
-version_scheme = "no-guess-dev"
+version_scheme = "m1n1._version_scheme:fork_post_dev_scheme"
 local_scheme = "no-local-version"
 
 [tool.pytest.ini_options]
