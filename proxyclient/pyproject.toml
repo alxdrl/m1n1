@@ -31,11 +31,11 @@ build-backend = "setuptools.build_meta"
 where = ["."]
 include = ["m1n1*", "tools*"]
 
-[tool.setuptools_scm]
-write_to = "m1n1/_version.py"
-search_parent_directories = true
-version_scheme = "m1n1._version_scheme:fork_post_dev_scheme"
-local_scheme = "no-local-version"
+#[tool.setuptools_scm]
+#write_to = "m1n1/_version.py"
+#search_parent_directories = true
+#version_scheme = "m1n1._version_scheme:fork_post_dev_scheme"
+#local_scheme = "no-local-version"
 
 [tool.pytest.ini_options]
 testpaths = ["../tests/python"]

@@ -4,7 +4,7 @@ PYTHON ?= python3
 TWINE ?= twine
 
 DATADIR := m1n1
-VERSION := $(shell python -c "import setuptools_scm; print(setuptools_scm.get_version(search_parent_directories=True), end='')" )
+VERSION := $(shell python setup.py --version)
 WHEEL := dist/m1n1_proxyclient-$(VERSION)-py3-none-any.whl
 TARBALL := dist/m1n1_proxyclient-$(VERSION).tar.gz
 $(info VERSION=$(VERSION) WHEEL=$(WHEEL) TARBALL=$(TARBALL))
