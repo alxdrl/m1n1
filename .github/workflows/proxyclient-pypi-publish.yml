@@ -1,0 +1,107 @@
+name: Publish m1n1-proxyclient to PyPI and TestPyPI
+
+on:
+  push:
+    branches:
+      - 'proxyclient/releases/**'
+    tags:
+      - 'proxyclient/v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build distribution package
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+        fetch-tags: true
+
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: "3.x"
+
+    - name: Install build tools
+      working-directory: proxyclient
+      run: python3 -m pip install build twine
+
+    - name: Build a binary wheel and a source tarball
+      working-directory: proxyclient
+      run: python3 -m build
+
+    - name: Check package metadata
+      working-directory: proxyclient
+      run: python3 -m twine check dist/*
+
+    - name: Smoke test wheel
+      working-directory: proxyclient
+      run: |
+        python3 -m venv /tmp/proxyclient-smoke
+        /tmp/proxyclient-smoke/bin/python -m pip install dist/*.whl
+        /tmp/proxyclient-smoke/bin/python -c "import m1n1; import m1n1.proxy"
+
+    - name: Store the distribution packages
+      uses: actions/upload-artifact@v7
+      with:
+        name: python-package-distributions
+        path: proxyclient/dist/
+
+  publish-to-testpypi:
+    name: Publish m1n1-proxyclient distribution package to TestPyPI
+    needs:
+    - build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/m1n1-proxyclient
+
+    permissions:
+      contents: read
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+
+    - name: Download all the dists
+      uses: actions/download-artifact@v8
+      with:
+        name: python-package-distributions
+        path: dist/
+
+    - name: Publish distribution package to TestPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
+
+  publish-to-pypi:
+    name: Publish m1n1-proxyclient distribution package to PyPI
+    if: startsWith(github.ref, 'refs/tags/proxyclient/')
+    needs:
+    - build
+    - publish-to-testpypi
+    runs-on: ubuntu-latest
+
+    environment:
+      name: pypi
+      url: https://pypi.org/p/m1n1-proxyclient
+
+    permissions:
+      contents: read
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+
+    steps:
+
+    - name: Download all the dists
+      uses: actions/download-artifact@v8
+      with:
+        name: python-package-distributions
+        path: dist/
+
+    - name: Publish distribution package to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
