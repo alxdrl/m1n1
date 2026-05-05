@@ -1,0 +1,59 @@
+[project]
+name = "m1n1-proxyclient"
+dynamic = ["version"]
+description = "M1N1 proxy client for interacting with Apple Silicon devices"
+authors = [
+    {name = "The Asahi Linux Contributors"}
+]
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS :: MacOS X",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Debuggers",
+    "Topic :: Software Development :: Embedded Systems",
+    "Topic :: System :: Boot",
+    "Topic :: System :: Hardware",
+    "Topic :: Terminals :: Serial",
+]
+dependencies = [
+    "construct>=2.10.70,<3.0.0",
+    "pyserial>=3.5,<4.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0"
+]
+interactive = [
+    "ipython",
+    "traitlets"
+]
+
+[project.urls]
+Homepage = "https://github.com/AsahiLinux/m1n1"
+Issues = "https://github.com/AsahiLinux/m1n1/issues"
+
+[build-system]
+requires = ["setuptools>=80", "setuptools-scm>=8.3,<9", "packaging"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["m1n1*", "tools*"]
+
+# Intentionally configured from setup.py because the custom version_scheme
+# must be a callable and pyproject-based setuptools_scm config bypasses it
+# in this downstream packaging layout.
+#[tool.setuptools_scm]
+
+[tool.pytest.ini_options]
+testpaths = ["../tests/python"]
+pythonpath = [".", ".."]
